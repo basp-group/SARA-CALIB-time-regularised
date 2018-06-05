@@ -61,21 +61,12 @@ disp(['SNR(x_approx_die) = ', num2str(snr_approx_die)]);
 % DDE parameters
 c = floor(S2/2) + 1;
 p = floor(P/2) + 1;
-theta_maxR = 2*A*ones(S2,1);
-theta_minR = -theta_maxR;
-theta_maxI = theta_maxR;
-theta_minI = theta_minR;
-theta_maxR(c) = (1 + 2*A_center);  
-theta_maxI(c) = 2*A_center;         
-theta_minR(c) = (1 - 2*A_center);   
-theta_minI(c) = -2*A_center;
-
-param_dde.theta_maxR = 2*A*ones(S2, P);   
-param_dde.theta_minR = -2*A*ones(S2, P);
-param_dde.theta_maxR(c, p) = 1 + 2*A;
-param_dde.theta_minR(c, p) = 1 - 2*A;
-param_dde.theta_maxI = 2*A*ones(S2, P);
-param_dde.theta_minI = -param_dde.theta_maxI;
+param_dde.theta_maxR = 2*A*ones(S2, P)*sqrt(F);   
+param_dde.theta_minR = -2*A*ones(S2, P)*sqrt(F);
+param_dde.theta_maxR(c, p) = (1 + 2*A_center)*sqrt(F);
+param_dde.theta_minR(c, p) = (1 - 2*A_center)*sqrt(F);
+param_dde.theta_maxI = 2*A*ones(S2, P)*sqrt(F);
+param_dde.theta_minI = -param_dde.theta_maxI*sqrt(F);
 
 % Initialize image parameters
 x0 = x_approx;
@@ -89,9 +80,9 @@ epsilon = zeros(size(x0));
 
 % DDE initialisation: /!\ beware amplitude
 p = floor(P/2) + 1;
-U1 = (A*(randn(S2, na, P) + 1i*randn(S2, na, P))/P);
+U1 = (A*(randn(S2, na, P) + 1i*randn(S2, na, P))/P)*sqrt(F);
 U1(:, :, p)=  0;
-U1(c, :, p) = 1;
+U1(c, :, p) = sqrt(F);
 U1r = max(min(real(U1), reshape(param_dde.theta_maxR, [S2, 1, P])), reshape(param_dde.theta_minR, [S2, 1, P]));
 U1i = max(min(imag(U1), reshape(param_dde.theta_maxI, [S2, 1, P])), reshape(param_dde.theta_minI, [S2, 1, P]));
 U1 = U1r + 1i*U1i;

@@ -40,7 +40,7 @@ id_a = find(Ya == 0); % indices of the missing measurements (represented by 0)
 % step size                    
 A = @(x) direct_operator(fliplr(x), H2a, F, T, Gt, scale_t, id_a); % do not forget the fliplr (property F(x*)[n] = {F(x)*}[-n]) 
 At = @(x) fliplr(adjoint_operator(x, H2a, F, T, Gt, scale_t, P));
-Lips_temp = mu + nuo + 2*lambda_scale*pow_method(@(x) A(x), @(x) At(x), size(u2a))/F;
+Lips_temp = mu + nuo + 2*lambda_scale*pow_method(@(x) A(x), @(x) At(x), size(u2a)); % /F
 gamma1 = 1.9/Lips_temp;
     
 % ----------------------------------------------------
@@ -48,7 +48,7 @@ gamma1 = 1.9/Lips_temp;
 % ----------------------------------------------------
 for q = 1:JU2o
     % gradient step
-    grad = 2*lambda_scale*At(squeeze(A(u2a)) - Ya)/F + nuo*(u2a - u1a) + mu*(u2a - Phi); % [S2, P], 0 are preserved using the structure of H2_a
+    grad = 2*lambda_scale*At(squeeze(A(u2a)) - Ya) + nuo*(u2a - u1a) + mu*(u2a - Phi); % /F [S2, P], 0 are preserved using the structure of H2_a
     g = u2a - gamma1*grad;
     % proximity step
     vr = min(max(real(g), theta_minoR), theta_maxoR);

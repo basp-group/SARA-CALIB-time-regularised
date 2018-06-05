@@ -27,10 +27,11 @@ function D = computeD(U, F, Gt, scale, T)
 % D = reshape(D.', [S2, n, T]);
 
 % Third version
-x = zeros(T, S2*n);
-c = floor(T/2) + 1;
+x = zeros(F, S2*n);
+c = floor(F/2) + 1;
 p = floor(P/2);
 x(c-p:c+p, :) = reshape(permute(U, [3, 1, 2]), [P, S2*n]); % [T, S2*n]
-D = reshape(T*ifft(ifftshift(x, 1), T, 1).', [S2, n, T]); % sqrt(T)
+D = reshape(sqrt(F)*ifft(ifftshift(x, 1), F, 1).', [S2, n, F]); % T*
+D = D(:, :, 1:T);
 
 end

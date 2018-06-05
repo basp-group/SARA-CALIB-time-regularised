@@ -37,7 +37,7 @@ function Ua = computeUa(Da, F, T, P, Gt, scale)
 % Corrected version
 c = floor(F/2) + 1;
 p = floor(P/2);
-y = fftshift(fft(Da.', F, 1), 1); % [T, S2] /sqrt(F)
+y = fftshift(fft(Da.', F, 1), 1)/sqrt(F); % [T, S2] /sqrt(F)
 Ua = y(c-p:c+p, :).'; % [S2, P]
 
 end

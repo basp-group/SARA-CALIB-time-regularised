@@ -43,7 +43,7 @@ x = zeros(F, S2);
 c = floor(F/2) + 1;
 p = floor(P/2);
 x(c-p:c+p, :) = Ua.';
-Da = F*ifft(ifftshift(x, 1), F, 1).'; % [S2, T] % sqrt(F)
+Da = sqrt(F)*ifft(ifftshift(x, 1), F, 1).'; % [S2, T] % F*
 Da = Da(:, 1:T);
 Da(id_a) = 0; % set to 0 the time instants corresponding to missing measurements
 

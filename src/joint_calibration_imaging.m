@@ -121,9 +121,9 @@ error_dirty(1) = sqrt(sum(sum((Bt_tmp(B_tmp(x0 + epsilon) - y)).^2)));
 snr_dirty(1) = SNR(Bt_tmp(B_tmp(x0 + epsilon)), Bt_tmp(y));
 snr_x(1) = SNR(x0 + epsilon, x_th);
 
-fprintf('================================================================================\n');
+fprintf('===============================================================================================\n');
 fprintf('Joint calibration and imaging (no temporal regularization) [%s]\n', name);
-fprintf('================================================================================\n');
+fprintf('===============================================================================================\n');
 %% Global algorithm
 tic
 for nIter = 1:param_dde.max_it
@@ -213,7 +213,7 @@ for nIter = 1:param_dde.max_it
             break
         end
     end 
-    fprintf('--------------------------------------------------------------------------------\n');
+    fprintf('-----------------------------------------------------------------------------------------------\n');
     
     %% Update Image
     
@@ -243,10 +243,11 @@ for nIter = 1:param_dde.max_it
     scale_x = sum(x_reg(:).*x_th(:))/sum(x_reg(:).^2);
     scaled_snr = SNR(scale_x*x_reg, x_th);
     
-    fprintf('%10s\t%15s\t%15s\t%15s\t%15s\n', 'Iteration', 'Objective', 'SNR', 'scaled SNR', 'Time')
-    fprintf('--------------------------------------------------------------------------------\n');
-    fprintf('%10i\t%15e\t%15e\t%15e\t%15e\n', nIter, objective(nIter+1), snr_x(nIter+1), scaled_snr, time_tot(nIter+1));
-    fprintf('================================================================================\n');
+    fprintf('%10s\t%15s\t%15s\t%15s\t%15s\t%15s\n', 'Iteration', 'Objective', 'SNR', 'scaled SNR', 'SNR (dirty)', 'Time')
+    fprintf('-----------------------------------------------------------------------------------------------\n');
+    fprintf('%10i\t%15e\t%15e\t%15e\t%15e\t%15e\n', nIter, objective(nIter+1), snr_x(nIter+1), ...
+             scaled_snr, snr_dirty(nIter+1), time_tot(nIter+1));
+    fprintf('===============================================================================================\n');
    
     if mod(nIter, 5)==0 % to be desactivated if needed
         save(['results/img_dde_no_reg_', name], 'U1', 'U2', 'epsilon')

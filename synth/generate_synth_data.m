@@ -59,9 +59,9 @@ M = na*(na-1)/2;
 % Generate ground truth DDEs
 cs = floor(S2/2) + 1; % center of the spatial support
 p = floor(P/2) + 1;
-U = A*(randn(S2, na, P) + 1i*randn(S2, na, P))/P;
+U = (A*(randn(S2, na, P) + 1i*randn(S2, na, P))/P)*sqrt(F);
 U(:, :, p) = 0;
-U(cs, :, p) = 1;
+U(cs, :, p) = sqrt(F);
 D = computeD(U, F, [], [], T);
 
 % Spatial gridding coefficients and associated frequencies

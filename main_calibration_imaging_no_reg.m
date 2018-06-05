@@ -81,9 +81,9 @@ epsilon = zeros(size(x0));
 
 % DDE initialisation: /!\ beware amplitude !
 p = floor(P/2) + 1;
-U = A*(randn(S2, na, P) + 1i*randn(S2, na, P))/P;
+U = (A*(randn(S2, na, P) + 1i*randn(S2, na, P))/P)*sqrt(F);
 U(:, :, p) = 0;
-U(c, :, p) = 1;
+U(c, :, p) = sqrt(F);
 D = computeD(U, F, [], [], T);
 D1r = max(min(real(D), param_dde.theta_maxR), param_dde.theta_minR);
 D1i = max(min(imag(D), param_dde.theta_maxI), param_dde.theta_minI);

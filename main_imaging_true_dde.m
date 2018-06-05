@@ -20,6 +20,7 @@ test_number = '1';
 test_aux = '';
 
 rng(3);
+util_create_pool_bis(4, []);
 
 % Data loading
 name = [cov_type, '_', im_choice, '_', test_number];
@@ -77,7 +78,7 @@ snr_true_dde = SNR(scale*x_true_dde, x_th);
 disp(['SNR(x_true_dde) = ', num2str(snr_true_dde)]);
 
 % results with approximate DDEs
-nIter_FB = 2e3; % 1e4
+nIter_FB = 2e3;
 D_approx = ones(1, na, T);
 param_algo.eta = eta;
 x_approx = imaging_fb(y, x_th, D_approx, D_approx, N, K, W, sp_scale, u, v, 1, J, nIter_FB, param_algo);
