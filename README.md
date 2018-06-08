@@ -13,8 +13,6 @@
 - main_imaging_true_dde.m
 - main_calibration_imaging_reg.m
 - main_calibration_imaging_no_reg.m
-- main_compute_results.m
-- main_display_results.m
 
 **Dependencies:** the present codes includes a slightly modified version of the MATLAB NUFFT algorithm available at http://web.eecs.umich.edu/~fessler/irt/fessler.tgz, described in
 
