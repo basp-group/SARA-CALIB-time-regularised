@@ -3,7 +3,7 @@
 **Description:** Matlab codes associated with the method described in 
 
 >P.-A. Thouvenin, A. Repetti, A. Dabbech, and Y. Wiaux - 
-<strong>Non-convex optimization for self-calibration of direction-dependent effects in radio interferometric imaging</strong>, <em>Proc. IEEE Sensor Array and Multichannel Signal Process. Workshop (SAM)</em>, to appear, Sheffield, United-Kingdom, 8--11 July 2018.
+<strong>Time-Regularized Blind Deconvolution Approach for Radio Interferometry</strong>, <em>Proc. IEEE Sensor Array and Multichannel Signal Process. Workshop (SAM)</em>, to appear, Sheffield, United-Kingdom, 8--11 July 2018.
 
 **Author:** P.-A. Thouvenin, p.thouvenin@hw.ac.uk
 
