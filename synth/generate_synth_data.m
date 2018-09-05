@@ -110,7 +110,7 @@ for t = 1:T
     G = createGnufft_T2(D(:, :, t), D(:, :, t), [v_ab(:, t), u_ab(:, t)], K, S, J, W{t});
     A_ = @(x) G*so_fft2(x, K, sp_scale);
     y0 = A_(x);
-    sigma_noise = sqrt(sum(abs(y0).^2)*10^(-input_snr/10));
+    sigma_noise = sqrt(sum(abs(y0).^2)*10^(-input_snr/20));
     noise = (randn(size(y0)) + 1i*randn(size(y0)))*sigma_noise/sqrt(2);
     y(:,t) = y0 + noise;
     % Create duplicate data Y [na, na]
